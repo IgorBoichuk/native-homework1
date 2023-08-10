@@ -19,8 +19,9 @@ export const RegistrationScreen = () => {
         <View style={styles.bgi}>
           <View style={styles.avatarContainer}>
             <Image source={avatar} style={styles.avatar} />
-
-            <Text style={styles.addAvatar}>+</Text>
+            <View style={styles.addAvatar}>
+              <Text style={styles.addAvatarPlus}>+</Text>
+            </View>
           </View>
         </View>
         <View style={styles.componentWrapper}>
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
   avatarContainer: {
     position: "absolute",
     zIndex: 2,
-    backgroundColor: "grey",
+    backgroundColor: "#F6F6F6",
     borderRadius: 20,
     width: 100,
     height: 100,
@@ -76,10 +77,20 @@ const styles = StyleSheet.create({
   },
 
   addAvatar: {
-    backgroundColor: "grey",
-    padding: 0,
+    position: "absolute",
+    zIndex: 3,
+    backgroundColor: "white",
     width: 20,
     borderRadius: 50,
+    right: "-10%",
+    bottom: "10%",
+    borderWidth: 1,
+    borderColor: "#FF6C00",
+  },
+  addAvatarPlus: {
+    color: "#FF6C00",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 
   avatar: {
@@ -92,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    marginTop: 200, // Опустити componentWrapper на 150 пікселів вниз
+    marginTop: 200,
   },
 
   title: {

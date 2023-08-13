@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   ImageBackground,
@@ -13,6 +13,24 @@ import bgImage from "./galary/bgimage.jpg";
 import avatar from "./galary/avatar.jpg";
 
 export const RegistrationScreen = () => {
+  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = () => {
+    console.log(
+      "User login: ",
+      login,
+      "User email: ",
+      email,
+      "User password: ",
+      password
+    );
+    setLogin("");
+    setEmail("");
+    setPassword("");
+  };
+
   return (
     <View style={styles.component}>
       <ImageBackground source={bgImage}>
@@ -26,19 +44,28 @@ export const RegistrationScreen = () => {
         </View>
         <View style={styles.componentWrapper}>
           <Text style={styles.title}>Реєстрація</Text>
-          <TextInput placeholder="Логін" style={styles.input} />
+          <TextInput
+            placeholder="Логін"
+            style={styles.input}
+            value={login}
+            onChangeText={setLogin}
+          />
           <TextInput
             placeholder="Адреса електронної пошти"
             keyboardType="email-address"
             autoCapitalize="none"
             style={styles.input}
+            value={email}
+            onChangeText={setEmail}
           />
           <TextInput
             placeholder="Пароль"
             secureTextEntry={true}
             style={styles.input}
+            value={password}
+            onChangeText={setPassword}
           />
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
             <Text style={styles.buttonText}>Зареєстуватися</Text>
           </TouchableOpacity>
           <View style={styles.loginQuary}>

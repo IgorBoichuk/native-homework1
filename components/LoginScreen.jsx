@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   ImageBackground,
@@ -12,6 +12,14 @@ import {
 import bgImage from "./galary/bgimage.jpg";
 
 export const LoginScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = () => {
+    console.log("User email: ", email, "User password: ", password);
+    setEmail("");
+    setPassword("");
+  };
   return (
     <View style={styles.component}>
       <ImageBackground source={bgImage}>
@@ -22,13 +30,17 @@ export const LoginScreen = () => {
             keyboardType="email-address"
             autoCapitalize="none"
             style={styles.input}
+            value={email}
+            onChangeText={setEmail}
           />
           <TextInput
             placeholder="Пароль"
             secureTextEntry={true}
             style={styles.input}
+            value={password}
+            onChangeText={setPassword}
           />
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
             <Text style={styles.buttonText}>Увійти</Text>
           </TouchableOpacity>
           <View style={styles.loginQuary}>

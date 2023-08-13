@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import {
   Image,
   ImageBackground,
+  Keyboard,
+  KeyboardAvoidingView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 
@@ -21,37 +24,43 @@ export const LoginScreen = () => {
     setPassword("");
   };
   return (
-    <View style={styles.component}>
-      <ImageBackground source={bgImage}>
-        <View style={styles.componentWrapper}>
-          <Text style={styles.title}>Увійти</Text>
-          <TextInput
-            placeholder="Адреса електронної пошти"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            style={styles.input}
-            value={email}
-            onChangeText={setEmail}
-          />
-          <TextInput
-            placeholder="Пароль"
-            secureTextEntry={true}
-            style={styles.input}
-            value={password}
-            onChangeText={setPassword}
-          />
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.buttonText}>Увійти</Text>
-          </TouchableOpacity>
-          <View style={styles.loginQuary}>
-            <Text style={styles.isAccount}>Немає акаунту?</Text>
-            <TouchableOpacity>
-              <Text style={styles.isAccount}>Зареєструватися</Text>
-            </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.component}>
+        <ImageBackground source={bgImage}>
+          <View style={styles.componentWrapper}>
+            <Text style={styles.title}>Увійти</Text>
+            <KeyboardAvoidingView
+              behavior={Platform.OS == "ios" ? "padding" : "height"}
+            >
+              <TextInput
+                placeholder="Адреса електронної пошти"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                style={styles.input}
+                value={email}
+                onChangeText={setEmail}
+              />
+              <TextInput
+                placeholder="Пароль"
+                secureTextEntry={true}
+                style={styles.input}
+                value={password}
+                onChangeText={setPassword}
+              />
+              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                <Text style={styles.buttonText}>Увійти</Text>
+              </TouchableOpacity>
+            </KeyboardAvoidingView>
+            <View style={styles.loginQuary}>
+              <Text style={styles.isAccount}>Немає акаунту?</Text>
+              <TouchableOpacity>
+                <Text style={styles.isAccount}>Зареєструватися</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

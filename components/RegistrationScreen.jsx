@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import {
   Image,
   ImageBackground,
+  Keyboard,
+  KeyboardAvoidingView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 
@@ -32,51 +35,57 @@ export const RegistrationScreen = () => {
   };
 
   return (
-    <View style={styles.component}>
-      <ImageBackground source={bgImage}>
-        <View style={styles.bgi}>
-          <View style={styles.avatarContainer}>
-            <Image source={avatar} style={styles.avatar} />
-            <View style={styles.addAvatar}>
-              <Text style={styles.addAvatarPlus}>+</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.component}>
+        <ImageBackground source={bgImage}>
+          <View style={styles.bgi}>
+            <View style={styles.avatarContainer}>
+              <Image source={avatar} style={styles.avatar} />
+              <View style={styles.addAvatar}>
+                <Text style={styles.addAvatarPlus}>+</Text>
+              </View>
             </View>
           </View>
-        </View>
-        <View style={styles.componentWrapper}>
-          <Text style={styles.title}>Реєстрація</Text>
-          <TextInput
-            placeholder="Логін"
-            style={styles.input}
-            value={login}
-            onChangeText={setLogin}
-          />
-          <TextInput
-            placeholder="Адреса електронної пошти"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            style={styles.input}
-            value={email}
-            onChangeText={setEmail}
-          />
-          <TextInput
-            placeholder="Пароль"
-            secureTextEntry={true}
-            style={styles.input}
-            value={password}
-            onChangeText={setPassword}
-          />
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.buttonText}>Зареєстуватися</Text>
-          </TouchableOpacity>
-          <View style={styles.loginQuary}>
-            <Text style={styles.isAccount}>Вже є акаунт?</Text>
-            <TouchableOpacity>
-              <Text style={styles.isAccount}>Увійти</Text>
-            </TouchableOpacity>
+          <View style={styles.componentWrapper}>
+            <Text style={styles.title}>Реєстрація</Text>
+            <KeyboardAvoidingView
+              behavior={Platform.OS == "ios" ? "padding" : "height"}
+            >
+              <TextInput
+                placeholder="Логін"
+                style={styles.input}
+                value={login}
+                onChangeText={setLogin}
+              />
+              <TextInput
+                placeholder="Адреса електронної пошти"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                style={styles.input}
+                value={email}
+                onChangeText={setEmail}
+              />
+              <TextInput
+                placeholder="Пароль"
+                secureTextEntry={true}
+                style={styles.input}
+                value={password}
+                onChangeText={setPassword}
+              />
+              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                <Text style={styles.buttonText}>Зареєстуватися</Text>
+              </TouchableOpacity>
+            </KeyboardAvoidingView>
+            <View style={styles.loginQuary}>
+              <Text style={styles.isAccount}>Вже є акаунт?</Text>
+              <TouchableOpacity>
+                <Text style={styles.isAccount}>Увійти</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

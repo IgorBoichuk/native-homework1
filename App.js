@@ -8,15 +8,20 @@ import { ProfileScreen } from "./Screens/ProfileScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import "react-native-gesture-handler";
-// import { LoginScreen } from "./components/LoginScreen";
-// import { RegistrationScreen  } from "./components/RegistrationScreen ";
+import { LoginScreen } from "./components/LoginScreen";
+import { RegistrationScreen } from "./components/RegistrationScreen";
 
 const MainStack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <MainStack.Navigator>
+      <MainStack.Navigator initialRouteName="LoginScreen">
+        <MainStack.Screen name="LoginScreen" component={LoginScreen} />
+        <MainStack.Screen
+          name="RegistrationScreen"
+          component={RegistrationScreen}
+        />
         <MainStack.Screen name="PostsScreen" component={PostsScreen} />
         <MainStack.Screen name="Home" component={Home} />
         <MainStack.Screen name="CommentsScreen" component={CommentsScreen} />
@@ -26,10 +31,6 @@ export default function App() {
         />
         <MainStack.Screen name="MapScreen" component={MapScreen} />
         <MainStack.Screen name="ProfileScreen" component={ProfileScreen} />
-
-        {/* <PostsScreen /> */}
-        {/* <MainStack.Screen name="Login" component={Login} /> */}
-        {/* <MainStack.Screen name="Registration" component={Registration} /> */}
       </MainStack.Navigator>
     </NavigationContainer>
   );

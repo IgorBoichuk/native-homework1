@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import {
-  Image,
   ImageBackground,
   Keyboard,
   KeyboardAvoidingView,
+  ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TextInput,
@@ -11,10 +12,12 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import bgImage from "./galary/bgimage.jpg";
 
 export const LoginScreen = () => {
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,43 +25,52 @@ export const LoginScreen = () => {
     console.log("User email: ", email, "User password: ", password);
     setEmail("");
     setPassword("");
+    navigation.navigate("PostsScreen");
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.component}>
-        <ImageBackground source={bgImage}>
-          <View style={styles.componentWrapper}>
-            <Text style={styles.title}>Увійти</Text>
-            <KeyboardAvoidingView
-              behavior={Platform.OS == "ios" ? "padding" : "height"}
-            >
-              <TextInput
-                placeholder="Адреса електронної пошти"
-                keyboardType="email-address"
-                autoCapitalize="none"
-                style={styles.input}
-                value={email}
-                onChangeText={setEmail}
-              />
-              <TextInput
-                placeholder="Пароль"
-                secureTextEntry={true}
-                style={styles.input}
-                value={password}
-                onChangeText={setPassword}
-              />
-              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Увійти</Text>
-              </TouchableOpacity>
-            </KeyboardAvoidingView>
-            <View style={styles.loginQuary}>
-              <Text style={styles.isAccount}>Немає акаунту?</Text>
-              <TouchableOpacity>
-                <Text style={styles.isAccount}>Зареєструватися</Text>
-              </TouchableOpacity>
+        <StatusBar style="auto" />
+        <ScrollView contentContainerStyle={styles.container}>
+          <ImageBackground source={bgImage}>
+            <View style={styles.componentWrapper}>
+              <Text style={styles.title}>Увійти</Text>
+              <KeyboardAvoidingView
+                behavior={Platform.OS == "ios" ? "padding" : "height"}
+              >
+                <TextInput
+                  placeholder="Адреса електронної пошти"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  style={styles.input}
+                  value={email}
+                  onChangeText={setEmail}
+                />
+                <TextInput
+                  placeholder="Пароль"
+                  secureTextEntry={true}
+                  style={styles.input}
+                  value={password}
+                  onChangeText={setPassword}
+                />
+                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                  <Text style={styles.buttonText}>Увійти</Text>
+                </TouchableOpacity>
+              </KeyboardAvoidingView>
+              <View style={styles.loginQuary}>
+                <Text style={styles.isAccount}>Немає акаунту?</Text>
+                <TouchableOpacity>
+                  <Text
+                    style={styles.isAccount}
+                    onPress={() => navigation.navigate("RegistrationScreen")}
+                  >
+                    Зареєструватися
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </ImageBackground>
+          </ImageBackground>
+        </ScrollView>
       </View>
     </TouchableWithoutFeedback>
   );
